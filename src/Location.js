@@ -3,11 +3,9 @@ if(typeof window.iconfall == "undefined"){
 }
 
 function Location(){
-    var self = this;
-
     (function Constructor(){
 
-    }).apply(self, arguments);
+    }).apply(this, arguments);
 }
 
 iconfall.Location = Location;

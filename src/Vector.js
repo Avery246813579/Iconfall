@@ -3,11 +3,9 @@ if (typeof window.iconfall == "undefined") {
 }
 
 function Vector() {
-    var self = this;
-
     (function Constructor(x, y, t) {
 
-    }).apply(self, arguments);
+    }).apply(this, arguments);
 }
 
 iconfall.Vector = Vector;
