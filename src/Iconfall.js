@@ -1,25 +1,24 @@
-if(typeof window.iconfall == "undefined"){
+if (typeof window.iconfall == "undefined") {
     window.iconfall = {};
 }
 
-function Iconfall(){
-    function createCanvas(){
-        var canvas = document.createElement('canvas');
+function Iconfall() {
+    function createCanvas() {
+        var canvas = document.getElementById('dog');
+        var ctx = canvas.getContext("2d");
 
-        canvas.id = "CursorLayer";
-        canvas.width = 1224;
-        canvas.height = 768;
-        canvas.style.zIndex = 8;
-        canvas.style.position = "absolute";
-        canvas.style.border = "1px solid";
-
-        document.body.appendChild(canvas);
+        canvas.width = 100;
+        canvas.height = 100;
 
         var image = new Image();
         image.src = "instagram.png";
+
+        image.onload = function () {
+            ctx.drawImage(image, 0, 0, 50, 50);
+        };
     }
 
-    (function Constructor(x){
+    (function Constructor(x) {
         console.dir(x);
 
         createCanvas();
