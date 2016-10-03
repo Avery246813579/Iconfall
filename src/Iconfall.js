@@ -3,19 +3,12 @@ if (typeof window.iconfall == "undefined") {
 }
 
 function Iconfall() {
-    function createCanvas() {
-        var canvas = document.getElementById('dog');
+    function updateCanvas() {
+        var canvas = document.getElementById(self.id);
         var ctx = canvas.getContext("2d");
 
         canvas.width = 100;
         canvas.height = 100;
-
-        var image = new Image();
-        image.src = "instagram.png";
-
-        image.onload = function () {
-            ctx.drawImage(image, 0, 0, 50, 50);
-        };
     }
 
     this.loadIcons = function(){
@@ -28,13 +21,20 @@ function Iconfall() {
         }
     };
 
+    this.getIcons = function(){
+        return this.icons;
+    };
+
     var self = this;
-    (function Constructor(icons) {
+    (function Constructor(id, icons) {
         this.iconLocations = icons;
+        this.id = id;
 
-        this.loadIcons();
+        self.loadIcons();
 
-        new Renderer(self);
+        updateCanvas();
+
+        new Renderer(this);
     }).apply(this, arguments);
 }
 

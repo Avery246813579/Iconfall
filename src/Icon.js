@@ -20,15 +20,18 @@ function Icon() {
         };
     };
 
-    this.test = function () {
-        console.dir(this.image);
+    this.tick = function (){
+        this.velocity.updateLocation(this.location);
+    };
+
+    this.getLocation = function(){
+        return this.location;
     };
 
     (function Constructor(source) {
         this.source = source;
 
         this.loadImage();
-        this.test();
     }).apply(this, arguments);
 }
 
