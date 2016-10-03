@@ -1,9 +1,35 @@
-if(typeof window.iconfall == "undefined"){
+if (typeof window.iconfall == "undefined") {
     window.iconfall = {};
 }
 
-function Icon(){
+function Icon() {
+    this.velocity = new Vector();
+    this.location = new Location();
 
+    this.loadImage = function () {
+        var self = this;
+        this.image = new Image();
+        this.image.src = this.source;
+
+        this.image.onload = function(){
+            info("Loaded icon at \"" + self.source + "\"");
+        };
+
+        this.image.onerror = function(){
+            error("Failed to load icon at \"" + self.source + "\"");
+        };
+    };
+
+    this.test = function () {
+        console.dir(this.image);
+    };
+
+    (function Constructor(source) {
+        this.source = source;
+
+        this.loadImage();
+        this.test();
+    }).apply(this, arguments);
 }
 
 iconfall.Icon = Icon;

@@ -18,10 +18,23 @@ function Iconfall() {
         };
     }
 
-    (function Constructor(x) {
-        console.dir(x);
+    this.loadIcons = function(){
+        this.icons = [];
 
-        createCanvas();
+        for(var i = 0; i < this.iconLocations.length; i++){
+            var icon = this.iconLocations[i];
+
+            this.icons.push(new Icon(icon));
+        }
+    };
+
+    var self = this;
+    (function Constructor(icons) {
+        this.iconLocations = icons;
+
+        this.loadIcons();
+
+        new Renderer(self);
     }).apply(this, arguments);
 }
 
