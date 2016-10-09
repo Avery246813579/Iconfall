@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Iconfall</title>
-    <link rel="stylesheet" type="text/css" href="general.css">
     <script src="dist/iconfall.js"></script>
+
+    <style>
+        html {
+            background-color: aquamarine;
+        }
+    </style>
+
 </head>
 <body>
-Does this work
 
-<canvas id="iconfall">
-sfg
+<canvas id="iconfall" style="width: 500px; height: 500px">
+
 </canvas>
 
 
 <script>
-    new iconfall.Iconfall("iconfall", ['instagram.png']);
+    new iconfall.Iconfall("iconfall", {SOURCE: 'public/assets/', ICONS: ['instagram', 'snapchat'], FILE_TYPE: 'png'});
 </script>
 </body>
 </html>

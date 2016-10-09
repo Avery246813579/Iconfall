@@ -20,6 +20,14 @@ function Location(){
         return this.x;
     };
 
+    this.setX = function(x){
+        this.x = x;
+    };
+
+    this.setY = function(y){
+        this.y = y;
+    };
+
     this.getY = function(){
         return this.y
     };
@@ -28,8 +36,15 @@ function Location(){
         return "(" + this.x + "," + this.y + ")";
     };
 
-    (function Constructor(){
+    var self = this;
+    (function Constructor(x, y){
+        if(typeof x != "undefined"){
+            self.x = x;
+        }
 
+        if(typeof y != "undefined"){
+            self.y = y;
+        }
     }).apply(this, arguments);
 }
 

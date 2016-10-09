@@ -3,35 +3,43 @@ if (typeof window.iconfall == "undefined") {
 }
 
 function Icon() {
-    this.velocity = new Vector();
-    this.location = new Location();
+    this.velocity = new Vector(1, 1);
+    this.location = new Location(-50, -50);
 
     this.loadImage = function () {
         var self = this;
-        this.image = new Image();
-        this.image.src = this.source;
+        var image = this.image = new Image();
+        var source = self.source;
 
-        this.image.onload = function(){
-            info("Loaded icon at \"" + self.source + "\"");
+        image.src = source;
+
+        image.onload = function () {
+            info("Loaded icon at \"" + source + "\"");
+            self.parent.icons.push(self);
         };
 
-        this.image.onerror = function(){
-            error("Failed to load icon at \"" + self.source + "\"");
+        image.onerror = function () {
+            error("Failed to load icon at \"" + source + "\"");
         };
     };
 
-    this.tick = function (){
+    this.tick = function () {
         this.velocity.updateLocation(this.location);
     };
 
-    this.getLocation = function(){
+    this.getLocation = function () {
         return this.location;
     };
 
-    (function Constructor(source) {
+    var self = this;
+    (function Constructor(source, parent) {
         this.source = source;
+        this.parent = parent;
 
-        this.loadImage();
+        self.loadImage();
+
+        var floor = Math.floor(Math.random() * 500);
+        self.getLocation().setX(floor);
     }).apply(this, arguments);
 }
 

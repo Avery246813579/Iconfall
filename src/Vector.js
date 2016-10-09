@@ -15,8 +15,15 @@ function Vector() {
         this.y = y;
     };
 
+    var self = this;
     (function Constructor(x, y, t) {
+        if(typeof x != "undefined"){
+            self.x = x;
+        }
 
+        if(typeof y != "undefined"){
+            self.y = y;
+        }
     }).apply(this, arguments);
 }
 
