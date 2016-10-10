@@ -2,8 +2,20 @@ if (typeof window.iconfall == "undefined") {
     window.iconfall = {};
 }
 
-function Iconfall() {
+// We use this for Locational based settings
+const NORTH = "NORTH", EAST = "EAST", SOUTH = "SOUTH", WEST = "WEST", RANDOM = "RANDOM";
 
+// Spawn Types
+const RANDOM_REPEATING = "RANDOM_REPEATING", ORDERED = "ORDERED", CENTER = "CENTER";
+const SPAWN_SIDES = [NORTH, SOUTH, EAST, WEST];
+const SPAWN_LOCATION = [RANDOM, CENTER];
+const SPAWN_TYPES = [RANDOM, RANDOM_REPEATING, ORDERED];
+
+// Edge Types
+const CIRCULAR = "CIRCULAR", DESPAWN = "DESPAWN", BREAK = "BREAK";
+
+
+function Iconfall() {
     /*
      Gravity:
      - Acceleration is done using Magnitude so we use 10 instead of -10.
@@ -22,12 +34,19 @@ function Iconfall() {
      - RANDOM_REPEATING
      - ORDERED
 
-     LOCATION:
+     SIDE:
      - Random
      - NORTH
      - EAST
      - SOUTH
      - WEST
+
+     Location:
+     - RANDOM
+     - CENTER
+     - (CUSTOM)
+     - (RANGE)
+
 
      MAX: The most icons that can be loaded
 
@@ -40,6 +59,14 @@ function Iconfall() {
      - CIRCULAR
      - DESPAWN
      - BREAK
+
+     Axis:
+     - NORTH
+     - SOUTH
+     - EAST
+     - WEST
+     - X
+     - Y
 
      Rotations: The amount of times an icon will rotate until it will be despawned (for circular) (-1 if never despawns)
      */
@@ -61,18 +88,25 @@ function Iconfall() {
             }
         },
         SPAWN: {
-            LOCATION: "NORTH",
-            TYPE: "RANDOM",
-            MAX: 5
+            SIDE: NORTH,
+            LOCATION: "CENTER",
+            TYPE: ORDERED,
+            MAX: 5,
+            DELAY: 2500,
+            ON_LOAD: true
         },
         EDGE: {
             TYPE: "DESPAWN",
-            ROTATIONS: 3
+            ROTATIONS: 3,
+            AXIS: "X"
         }
     };
 
+    this.iconBin = [];
+    this.icons = [];
+
     this.updateCanvas = function () {
-        var canvas = this.canvas = document.getElementById(self.id);
+        var canvas = document.getElementById(self.id);
         this.ctx = canvas.getContext("2d");
 
         canvas.width = parseInt(canvas.style.width, 10);
@@ -80,11 +114,12 @@ function Iconfall() {
 
         this.ctx.rect(0, 0, 500, 500);
         this.ctx.stroke();
+
+        self.canvas = canvas;
     };
 
     this.loadIcons = function () {
         var iconData = this.iconData;
-        this.icons = [];
 
         //We have a dictionary (Assume array and location)
         if (Object.prototype.toString.call(iconData) == '[object Object]') {
@@ -144,10 +179,8 @@ function Iconfall() {
         this.iconData = iconData;
         this.id = id;
 
-        console.log("HERE");
-
-        self.loadIcons();
         self.updateCanvas();
+        self.loadIcons();
 
         new Renderer(this);
     }).apply(this, arguments);

@@ -15,6 +15,10 @@ function Vector() {
         this.y = y;
     };
 
+    this.toString = function(){
+        return "(" + this.x + "," + this.y + ")";
+    };
+
     var self = this;
     (function Constructor(x, y, t) {
         if(typeof x != "undefined"){

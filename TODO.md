@@ -5,9 +5,12 @@ This is a file to help me remember what I want to add
 ## Pre Release
 
 - Add Spawn
-    - Implement location
-    - Implement type
-    - Implement max
+    - Implement location 
+    + Implement sides (Also multiple sides)
+    + Implement type
+    + Implement max
+    - Implement spawn delay (Between two times)
+    - Implement multiple sides and locations 
 - Add Edge
     - Implement type
     - Implement rotation's
@@ -21,10 +24,12 @@ This is a file to help me remember what I want to add
     - Implement enabling
     
 - Ignore case 
+- Add Spawn, Start, Stop methods in Iconfall. 
     
 ## Stretch Goals
 
-- Add a break element in edge that has advanced break options and what happens when the icon disappears 
+- Shatter & Break Types 
 - Comment Code
-- Make some sick README
-- Add a tutorial website
+- Advanced README & Example Files
+- Tutorial Website
+- Block Interactions 
