@@ -89,7 +89,7 @@ function Iconfall() {
         },
         SPAWN: {
             SIDE: NORTH,
-            LOCATION: "CENTER",
+            LOCATION: CENTER,
             TYPE: ORDERED,
             MAX: 5,
             DELAY: 2500,

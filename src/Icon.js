@@ -31,6 +31,10 @@ function Icon() {
         var canvas = self.parent.canvas;
 
         var side = spawn['SIDE'];
+        if(typeof spawn['SIDE'] == ""){
+
+        }
+
         if (spawn['SIDE'] == RANDOM) {
             side = SPAWN_SIDES[Math.floor(Math.random() * SPAWN_SIDES.length)];
         }
