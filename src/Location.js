@@ -36,6 +36,10 @@ function Location(){
         return "(" + this.x + "," + this.y + ")";
     };
 
+    this.setLocation = function(location){
+        this.location = location;
+    };
+
     var self = this;
     (function Constructor(x, y){
         if(typeof x != "undefined"){

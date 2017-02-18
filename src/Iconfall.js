@@ -70,6 +70,23 @@ function Iconfall() {
 
      Rotations: The amount of times an icon will rotate until it will be despawned (for circular) (-1 if never despawns)
      */
+    this.settingsv2 = {
+        ICONS: [],
+        DELAY: 2500, //Ticks,
+        SPAWN_ON_LOAD: true,
+        RANDOM: true,
+        REPEAT: true,
+        MAX_SPAWN: 5,
+        FALL_SIDE: [],
+        GRAVITY_SIDE: [],
+        DROP_DELETE: [],
+        GRAVITY_PIXELS_PER_TICK: 5
+    };
+
+    this.variables = {
+        GRAVITY_CONSTANT: new Vector(1, this.settingsv2['GRAVITY_PIXELS_PER_TICK'])
+    };
+
     this.settings = {
         GRAVITY: {
             DIRECTION: "SOUTH",
@@ -104,19 +121,6 @@ function Iconfall() {
 
     this.iconBin = [];
     this.icons = [];
-
-    this.updateCanvas = function () {
-        var canvas = document.getElementById(self.id);
-        this.ctx = canvas.getContext("2d");
-
-        canvas.width = parseInt(canvas.style.width, 10);
-        canvas.height = parseInt(canvas.style.height, 10);
-
-        this.ctx.rect(0, 0, 500, 500);
-        this.ctx.stroke();
-
-        self.canvas = canvas;
-    };
 
     this.loadIcons = function () {
         var iconData = this.iconData;
@@ -166,8 +170,17 @@ function Iconfall() {
         }
     };
 
-    this.updateSettings = function (settings) {
+    this.updateCanvas = function () {
+        var canvas = document.getElementById(self.id);
+        this.ctx = canvas.getContext("2d");
 
+        canvas.width = parseInt(canvas.style.width, 10);
+        canvas.height = parseInt(canvas.style.height, 10);
+
+        this.ctx.rect(0, 0, 500, 500);
+        this.ctx.stroke();
+
+        self.canvas = canvas;
     };
 
     this.getIcons = function () {

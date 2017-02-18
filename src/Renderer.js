@@ -41,7 +41,7 @@ function Renderer() {
         var now = new Date().getTime();
         var difference = now - self.lastTime;
 
-        if(self.firstSpawn === true){
+        if(self.firstSpawn == true){
             self.firstSpawn = false;
 
             spawnIcon(true);
@@ -55,11 +55,11 @@ function Renderer() {
     }
 
     function spawnIcon(firstSpawn){
-        var spawn = self.parent.settings['SPAWN'];
+        var spawn = self.parent.settingsv2['MAX_SPAWN'];
         var bin = self.parent.iconBin;
         var icons = self.parent.icons;
 
-        if (bin.length < 1 || spawn['MAX'] <= icons.length) {
+        if (bin.length < 1 || spawn <= icons.length) {
             if(typeof firstSpawn != "undefined"){
                 self.firstSpawn = true;
             }
@@ -67,19 +67,17 @@ function Renderer() {
             return;
         }
 
-        var type = spawn['TYPE'];
-
-        var index = 0;
-        if (type == RANDOM || type == RANDOM_REPEATING) {
+        var index = 0, icon = bin[index];
+        if (self.parent.settingsv2['RANDOM'] && self.parent.settingsv2['REPEAT']) {
             index = Math.floor(Math.random() * bin.length);
-        }
-
-        var icon = bin[index];
-        if (type == RANDOM || type == ORDERED) {
+        }else {
             bin.splice(bin.indexOf(icon), 1);
         }
 
-        icons.push(icon.clone());
+        var sIcon = bin[index].clone();
+        sIcon.setVelocity(self.parent.variables['GRAVITY_CONSTANT']);
+
+        icons.push(sIcon);
     }
 
     var self = this;
@@ -87,13 +85,13 @@ function Renderer() {
         self.parent = parent;
         self.animationID = requestAnimationFrame(draw);
 
-        var settings = parent.settings;
-        var delay = settings['SPAWN']['DELAY'];
+        var settings = parent.settingsv2;
+        var delay = settings['DELAY'];
         if (typeof delay == "number") {
             self.waitTime = delay;
         }
 
-        if(settings['SPAWN']['ON_LOAD'] == true) {
+        if(settings['SPAWN_ON_LOAD'] == true) {
             self.firstSpawn = true;
         }
     }).apply(this, arguments);
